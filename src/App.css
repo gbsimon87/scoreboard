@@ -1,38 +1,185 @@
 .App {
+  max-height: 100dvh;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.button {
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.25rem;
+}
+
+.scoreboard {
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
+  padding-bottom: 2rem;
+  height: inherit;
+}
+
+.scoreboard .scoreboard-area__score {
+  display: flex;
+  flex: 1 1;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #efbb78;
+  background-image: url(./images/backgroundBasketballCourt.jpeg);
+  background-position: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.scoreboard-area__score-history {
+  display: flex;
+  gap: 3rem;
+}
+
+.scoreboard-area__score-history .undo {
+  background-image: url(./images/undo.jpeg);
+  width: 3rem;
+  height: 1.5rem;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.scoreboard-area__score-history .redo {
+  background-image: url(./images/redo.jpeg);
+  width: 3rem;
+  height: 1.5rem;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.scoreboard-area__score-team-scores {
+  display: flex;
+  gap: 3rem;
+  color: #584333;
+  font-size: 2rem;
+}
+
+.scoreboard-area__score-team-scores>div {
+  background: black;
+  opacity: 0.3;
+  color: white;
+  padding: 0.5rem;
+}
+
+.scoreboard-area__score-selected-player {
+  color: black;
+  font-weight: bold;
+}
+
+.scoreboard-area__score-stats-categories {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.scoreboard-area__score-stats-categories .stats-category {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.scoreboard-area__score-stats-categories>.stats-category>div:first-child {
+  color: black;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+
+/* SECOND SECTION */
+
+.scoreboard .scoreboard-area__stats-options {
   display: flex;
-  flex-direction: column;
+  flex: 1;
+  padding: 0 2rem;
+}
+
+.scoreboard .scoreboard-area__stats-options .left-side {
+  display: flex;
+  flex: 3 1;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  column-gap: 1rem;
+  row-gap: 0;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.scoreboard .scoreboard-area__stats-options .left-side .left-side__stats {
+  flex-basis: 25%;
+  padding: 0.5rem;
+  background: #22ac93;
   color: white;
+  font-size: 1.25rem;
+  display: flex;
+  justify-content: center;
 }
 
-.App-link {
-  color: #61dafb;
+.scoreboard .scoreboard-area__stats-options .right-side {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-end;
+  column-gap: 1rem;
+  row-gap: 0;
+  align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.scoreboard .scoreboard-area__stats-options .right-side .right-side__stats {
+  padding: 0.5rem;
+  color: white;
+  font-size: 1.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e2183b;
+  width: 4rem;
+}
+
+/* THIRD SECTION */
+
+.scoreboard .scoreboard-area__teams {
+  display: flex;
+  padding: 0 1rem;
+  gap: 2rem;
+  overflow: scroll;
+}
+
+.scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list {
+  flex: 1 1;
+  flex-flow: column;
+  display: flex;
+  gap: 1rem;
+}
+
+.scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list>div:last-child {
+  margin-bottom: 2rem;
+}
+
+.scoreboard-area__teams--team-list.team-list-right {
+  position: relative;
+}
+
+.scoreboard-area__teams--team-list.team-list-right::before {
+  content: "";
+  height: 100%;
+  border: 1px solid black;
+  border-radius: 50%;
+  position: absolute;
+  left: -1rem;
+}
+
+.scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list .player {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list .player .player_name {
+  flex: 3 1;
+  display: flex;
+}
+
+.scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list .player .player_position {
+  color: #bababa;
 }
