@@ -509,79 +509,70 @@ function App() {
     <div className="App">
       <div className="scoreboard">
         <div className="scoreboard-area__score">
-          <div className="scoreboard-area__score-history">
-            <div className="undo"></div>
-            <div className="redo"></div>
-          </div>
           <div className="scoreboard-area__score-team-scores">
             <div>{homeScore}</div>
             <div>{awayScore}</div>
           </div>
-          <div className="scoreboard-area__score-selected-player">
-            <p>
-              {(selectedPlayer && selectedPlayer.player && selectedPlayer.player.number)}
-              &nbsp;&nbsp;
-              {(selectedPlayer && selectedPlayer.player && selectedPlayer.player.name)}
-            </p>
-          </div>
-          <div className="scoreboard-area__score-stats-categories">
-            <div className="stats-category">
-              <div className="stats-category_points-name">
-                PTS
+          {Object.keys(selectedPlayer).length > 0 && (
+            <div className="scoreboard-area__score-stats-categories">
+              <div className="stats-category">
+                <div className="stats-category_points-name">
+                  PTS
+                </div>
+                <div className="stats-category_points-value">
+                {selectedPlayer && selectedPlayer.player && selectedPlayer.player["points"]}
+                </div>
               </div>
-              <div className="stats-category_points-value">
-              {(selectedPlayer && selectedPlayer.player && selectedPlayer.player["points"]) || 0}
+              <div className="stats-category">
+                <div className="stats-category_assists-name">
+                  AST
+                </div>
+                <div className="stats-category_assists-value">
+                {selectedPlayer && selectedPlayer.player && selectedPlayer.player["assists"]}
+                </div>
               </div>
-            </div>
-            <div className="stats-category">
-              <div className="stats-category_assists-name">
-                AST
+              <div className="stats-category">
+                <div className="stats-category_rebounds-name">
+                  REB
+                </div>
+                <div className="stats-category_rebounds-value">
+                {selectedPlayer && selectedPlayer.player && selectedPlayer.player["rebounds"]}
+                </div>
               </div>
-              <div className="stats-category_assists-value">
-              {(selectedPlayer && selectedPlayer.player && selectedPlayer.player["assists"]) || 0}
+              <div className="stats-category">
+                <div className="stats-category_steals-name">
+                  STL
+                </div>
+                <div className="stats-category_steals-value">
+                  {selectedPlayer && selectedPlayer.player && selectedPlayer.player["steals"]}
+                </div>
               </div>
-            </div>
-            <div className="stats-category">
-              <div className="stats-category_rebounds-name">
-                REB
+              <div className="stats-category">
+                <div className="stats-category_blocks-name">
+                  BLK
+                </div>
+                <div className="stats-category_blocks-value">
+                {selectedPlayer && selectedPlayer.player && selectedPlayer.player["blocks"]}
+                </div>
               </div>
-              <div className="stats-category_rebounds-value">
-              {(selectedPlayer && selectedPlayer.player && selectedPlayer.player["rebounds"]) || 0}
+              <div className="stats-category">
+                <div className="stats-category_turnovers-name">
+                  TO
+                </div>
+                <div className="stats-category_turnovers-value">
+                {selectedPlayer && selectedPlayer.player && selectedPlayer.player["turnovers"]}
+                </div>
               </div>
-            </div>
-            <div className="stats-category">
-              <div className="stats-category_steals-name">
-                STL
-              </div>
-              <div className="stats-category_steals-value">
-                {(selectedPlayer && selectedPlayer.player && selectedPlayer.player["steals"]) || 0}
-              </div>
-            </div>
-            <div className="stats-category">
-              <div className="stats-category_blocks-name">
-                BLK
-              </div>
-              <div className="stats-category_blocks-value">
-              {(selectedPlayer && selectedPlayer.player && selectedPlayer.player["blocks"]) || 0}
-              </div>
-            </div>
-            <div className="stats-category">
-              <div className="stats-category_turnovers-name">
-                TO
-              </div>
-              <div className="stats-category_turnovers-value">
-              {(selectedPlayer && selectedPlayer.player && selectedPlayer.player["turnovers"]) || 0}
-              </div>
-            </div>
-            <div className="stats-category">
-              <div className="stats-category_fouls-name">
-                FL
-              </div>
-              <div className="stats-category_fouls-value">
-              {(selectedPlayer && selectedPlayer.player && selectedPlayer.player["fouls"]) || 0}
+              <div className="stats-category">
+                <div className="stats-category_fouls-name">
+                  FL
+                </div>
+                <div className="stats-category_fouls-value">
+                {selectedPlayer && selectedPlayer.player && selectedPlayer.player["fouls"]}
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
         <div className="scoreboard-area__stats-options">
           <div className="left-side">
@@ -605,7 +596,7 @@ function App() {
           <div className="scoreboard-area__teams--team-list team-list-left">
             {
               homeTeamData.map((player, index) => (
-                <div key={index} className="player" onClick={() => handleSelectPlayer(player, "home")}>
+                <div key={index} className={`player ${selectedPlayer && selectedPlayer.player && selectedPlayer.player.id === player.id ? "player-selected" : ""}`} onClick={() => handleSelectPlayer(player, "home")}>
                   <div className="player_number">{player.number}</div>
                   <div className="player_name">{player.name}</div>
                   <div className="player_position">{player.position}</div>
@@ -616,7 +607,7 @@ function App() {
           <div className="scoreboard-area__teams--team-list team-list-right">
             {
               awayTeamData.map((player, index) => (
-                <div key={index} className="player" onClick={() => handleSelectPlayer(player, "away")}>
+                <div key={index} className={`player ${selectedPlayer && selectedPlayer.player && selectedPlayer.player.id === player.id ? "player-selected" : ""}`} onClick={() => handleSelectPlayer(player, "away")}>
                   <div className="player_number">{player.number}</div>
                   <div className="player_name">{player.name}</div>
                   <div className="player_position">{player.position}</div>
