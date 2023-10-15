@@ -585,20 +585,20 @@ function App() {
         </div>
         <div className="scoreboard-area__stats-options">
           <div className="left-side">
-            <button className="button button_made left-side__stats" onClick={() => handleAction("steals")}>STL</button>
-            <button className="button button_made left-side__stats" onClick={() => handleAction("threePoints")}>3PT</button>
-            <button className="button button_made left-side__stats" onClick={() => handleAction("turnovers")}>TO</button>
-            <button className="button button_made left-side__stats" onClick={() => handleAction("blocks")}>BLK</button>
-            <button className="button button_made left-side__stats" onClick={() => handleAction("twoPoints")}>2PT</button>
             <button className="button button_made left-side__stats" onClick={() => handleAction("fouls")}>FL</button>
-            <button className="button button_made left-side__stats" onClick={() => handleAction("rebounds")}>REB</button>
-            <button className="button button_made left-side__stats" onClick={() => handleAction("assists")}>AST</button>
+            <button className="button button_made left-side__stats" onClick={() => handleAction("turnovers")}>TO</button>
             <button className="button button_made left-side__stats" onClick={() => handleAction("freethrows")}>FT</button>
+            <button className="button button_made left-side__stats" onClick={() => handleAction("steals")}>STL</button>
+            <button className="button button_made left-side__stats" onClick={() => handleAction("blocks")}>BLK</button>
+            <button className="button button_made left-side__stats" onClick={() => handleAction("threePoints")}>3PT</button>
+            <button className="button button_made left-side__stats" onClick={() => handleAction("assists")}>AST</button>
+            <button className="button button_made left-side__stats" onClick={() => handleAction("rebounds")}>REB</button>
+            <button className="button button_made left-side__stats" onClick={() => handleAction("twoPoints")}>2PT</button>
           </div>
           <div className="right-side">
-            <button className="button button_missed right-side__stats">3PtM</button>
-            <button className="button button_missed right-side__stats">FGM</button>
-            <button className="button button_missed right-side__stats">FTM</button>
+            <button className="button button_missed right-side__stats">FT</button>
+            <button className="button button_missed right-side__stats">3PT</button>
+            <button className="button button_ed right-side__stats">2PT</button>
           </div>
         </div>
         <div className="scoreboard-area__teams">

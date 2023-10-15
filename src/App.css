@@ -92,49 +92,38 @@
   display: flex;
   flex: 1;
   padding: 0 2rem;
+  gap: 2rem;
 }
 
 .scoreboard .scoreboard-area__stats-options .left-side {
   display: flex;
   flex: 3 1;
   flex-wrap: wrap;
-  gap: 1rem;
   justify-content: space-between;
   column-gap: 1rem;
-  row-gap: 0;
+  row-gap: 1rem;
   align-items: center;
 }
 
 .scoreboard .scoreboard-area__stats-options .left-side .left-side__stats {
   flex-basis: 25%;
-  padding: 0.5rem;
   background: #22ac93;
   color: white;
-  font-size: 1.25rem;
   display: flex;
   justify-content: center;
 }
 
 .scoreboard .scoreboard-area__stats-options .right-side {
+  flex: 1 1;
   display: flex;
-  flex: 1;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: flex-end;
-  column-gap: 1rem;
-  row-gap: 0;
-  align-items: center;
+  row-gap: 1rem;
+  justify-content: center;
+  flex-flow: column;
 }
 
 .scoreboard .scoreboard-area__stats-options .right-side .right-side__stats {
-  padding: 0.5rem;
   color: white;
-  font-size: 1.25rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: #e2183b;
-  width: 4rem;
 }
 
 /* THIRD SECTION */
@@ -173,6 +162,7 @@
 .scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list .player {
   display: flex;
   gap: 0.5rem;
+  justify-content: space-between;
 }
 
 .scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list .player .player_name {
