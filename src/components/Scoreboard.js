@@ -167,7 +167,9 @@ const Scoreboard = ({ selectedPlayer, handleAction, handleSelectPlayer }) => {
         </div>
       </div>
 
-      <button onClick={handleFinishGame}>Finish Game</button>
+      <div className="scoreboard-area__finish">
+        <button className="button" onClick={handleFinishGame}>Finish Game</button>
+      </div>
 
       <ConfirmationModal
         isOpen={isModalOpen}
