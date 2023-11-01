@@ -1,13 +1,28 @@
 .App {
   max-height: 100dvh;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
 }
 
 .button {
   border: none;
   border-radius: 0.2rem;
   padding: 0.25rem;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page--home.center {
+  font-size: 4rem;
+  text-align: center;
 }
 
 .scoreboard {
@@ -23,13 +38,13 @@
   flex: 1 1;
   flex-flow: column;
   align-items: center;
-  justify-content: space-around;
   background-color: #efbb78;
   background-image: url(./images/backgroundBasketballCourt.jpeg);
   background-position: center;
   color: white;
   font-size: 1.2rem;
-  min-height: 8rem;
+  min-height: 6rem;
+  padding: 0.5rem;
 }
 
 .scoreboard-area__score-history {
@@ -62,10 +77,10 @@
 }
 
 .scoreboard-area__score-team-scores>div {
-  background: black;
-  opacity: 0.3;
-  color: white;
-  padding: 0.5rem;
+  color: #0e0d0c;
+  flex: 1;
+  display: flex;
+  gap: 0.5rem;
 }
 
 .scoreboard-area__score-selected-player {
@@ -142,18 +157,18 @@
   flex: 1 1;
   flex-flow: column;
   display: flex;
-  gap: 0.5rem;
+  font-size: 1.25rem;
 }
 
 .scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list>div:last-child {
   margin-bottom: 2rem;
 }
 
-.scoreboard-area__teams--team-list.team-list-right {
+.scoreboard-area__teams--team-list.team-list-away {
   position: relative;
 }
 
-.scoreboard-area__teams--team-list.team-list-right::before {
+.scoreboard-area__teams--team-list.team-list-away::before {
   content: "";
   height: 100%;
   border: 1px solid black;
@@ -164,10 +179,6 @@
 
 .scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list .player {
   display: flex;
-  gap: 0.5rem;
-  justify-content: space-between;
-  display: flex;
-  gap: 0.5rem;
   justify-content: space-between;
   min-height: 3rem;
   align-items: center;
@@ -175,7 +186,6 @@
 
 .scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list .player.player-selected {
   background: #e3aa69;
-  padding: 0.2rem 0.1rem;
   color: white;
 }
 
@@ -186,17 +196,37 @@
 .scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list .player .player_name {
   flex: 3 1;
   display: flex;
+  justify-content: center;
+}
+
+.page {
+  padding: 1rem;
 }
 
 .page--home {
   background: url(./images/basketballDunk.jpeg) left/cover no-repeat;
   min-height: calc(100vh - 3rem);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: #e6e1e2;
-  font-size: 4rem;
-  text-align: center;
+  position: relative;
+}
+
+.page--home .games {
+  display: flex;
+  flex-flow: column;
+  gap: 2rem;
+  padding: 1rem;
+  background: #0e0d0c;
+  opacity: 0.9;
+}
+
+.page--home .button--create-game {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 1rem;
+  background: #e6e1e2;
+  color: #0e0d0c;
+  font-size: 1rem;
 }
 
 .page--login {
@@ -224,6 +254,19 @@
   opacity: 0.9;
 }
 
+.page--new-game {
+  padding: 1rem;
+  display: flex;
+  flex-flow: column;
+  gap: 2rem;
+}
+
+.page--new-game form {
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
+}
+
 .nav--top {
   background: #0e0d0c;
   display: flex;
@@ -244,4 +287,52 @@
 .nav--top__right {
   display: flex;
   gap: 1rem;
+}
+
+.noMatch {
+  display: flex;
+  flex-flow: column;
+  gap: 3rem;
+  align-items: center;
+  font-size: 2rem;
+  padding-top: 3rem;
+}
+
+.noMatch img {
+  width: 100%;
+  max-width: 950px;
+}
+
+/* Modal overlay */
+.modal-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+/* Modal content */
+.modal {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  position: relative;
+  z-index: 1001;
+}
+
+/* Close button for the modal */
+.modal .close-modal-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }

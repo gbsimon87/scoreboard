@@ -1,16 +1,16 @@
 import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../auth/AuthStatus';
+import { useGlobalContext } from '../../context/GlobalContext';
 
 function NavTop() {
   const location = useLocation();
   let navigate = useNavigate();
 
-  let auth = useAuth();
+  const { state, signout } = useGlobalContext();
 
   const handleSignOut = (event) => {
     event.preventDefault();
-    auth.signout(() => navigate("/"))
+    signout(() => navigate("/"))
   }
 
   return (
@@ -19,9 +19,9 @@ function NavTop() {
         <Link to="/">PSN</Link>
       </div>
       <div className='nav--top__right'>
-        {location.pathname === "/login" ? null : auth?.user ? null : <Link to="/login">Login</Link>}
-        {auth?.user ? <Link onClick={(event) => handleSignOut(event)}>Log out</Link> : null}
-        {auth?.user ? <Link to="/scoreboard">Scoreboard</Link> : null}
+        {location.pathname === "/login" ? null : state?.user ? null : <Link to="/login">Login</Link>}
+        {state?.user ? <Link onClick={(event) => handleSignOut(event)}>Log out</Link> : null}
+        {state?.user ? <Link to="/scoreboard">Scoreboard</Link> : null}
       </div>
     </div>
   )

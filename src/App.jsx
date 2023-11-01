@@ -1,21 +1,20 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import AuthProvider from './auth/AuthProvider';
 import RequireAuth from './auth/RequireAuth';
 import Layout from './components/Layout/Layout';
 import LoginPage from './components/Login/LoginPage';
-import Scoreboard from './components/Scoreboard';
+import FormNewGame from './components/Forms/FormNewGame';
 import Home from './components/Home';
 import NoMatch from './components/NoMatch';
 import './App.css';
+import { GlobalProvider } from './context/GlobalContext';
+import Scoreboard from './components/Scoreboard';
 
 function App() {
   const [selectedPlayer, setSelectedPlayer] = useState({});
   // eslint-disable-next-line no-unused-vars
-  const [homeScore, setHomeScore] = useState(0);
-  // eslint-disable-next-line no-unused-vars
-  const [awayScore, setAwayScore] = useState(0);
   const [homeTeamData, setHomeTeamData] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [awayTeamData, setAwayTeamData] = useState([]);
 
   const data = {
@@ -499,26 +498,22 @@ function App() {
   };
 
   useEffect(() => {
-    console.log(selectedPlayer);
+    // console.log(selectedPlayer);
   
     return () => {
-      console.log('exiting selectedPlayer useEffect');
+      // console.log('exiting selectedPlayer useEffect');
     }
-  }, [selectedPlayer])
+  }, [selectedPlayer]);
 
   useEffect(() => {
     setHomeTeamData(data.homeTeam);
     setAwayTeamData(data.awayTeam);
-  
-    return () => {
-      console.log('exiting CDM')
-    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  
+  }, []);
+ 
   return (
     <div className="App">
-      <AuthProvider>
+      <GlobalProvider>
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />              
@@ -528,21 +523,25 @@ function App() {
               element={
                 <RequireAuth>
                   <Scoreboard
-                    homeScore={homeScore}
-                    awayScore={awayScore}
                     selectedPlayer={selectedPlayer}
-                    homeTeamData={homeTeamData}
-                    awayTeamData={awayTeamData}
                     handleAction={handleAction}
                     handleSelectPlayer={handleSelectPlayer}
-                    />
+                  />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="new-game"
+              element={
+                <RequireAuth>
+                  <FormNewGame />
                 </RequireAuth>
               }
             />
           <Route path="*" element={<NoMatch />} />
           </Route>
         </Routes>
-      </AuthProvider>
+      </GlobalProvider>
     </div>
   );
 }
