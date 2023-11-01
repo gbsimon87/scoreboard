@@ -539,7 +539,7 @@ function App() {
                 </RequireAuth>
               }
             />
-            <Route path="*" element={<NoMatch />} />
+          <Route path="*" element={<NoMatch />} />
           </Route>
         </Routes>
       </AuthProvider>

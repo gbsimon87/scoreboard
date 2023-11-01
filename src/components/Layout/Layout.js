@@ -1,21 +1,11 @@
 import React from 'react'
-import AuthStatus from '../../auth/AuthStatus';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import NavTop from '../Nav/NavTop';
 
 function Layout() {
   return (
     <div>
-      <AuthStatus />
-
-      <ul>
-        <li>
-          <Link to="/">Public Page</Link>
-        </li>
-        <li>
-          <Link to="/scoreboard">Scoreboard</Link>
-        </li>
-      </ul>
-
+      <NavTop />
       <Outlet />
     </div>
   );

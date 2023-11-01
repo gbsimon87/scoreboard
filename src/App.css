@@ -108,7 +108,7 @@
   align-items: center;
 }
 
-.scoreboard .scoreboard-area__stats-options .left-side .left-side__stats {
+.scoreboard .scoreboard-area__stats-options .button_made {
   flex-basis: 25%;
   background: #22ac93;
   color: white;
@@ -186,4 +186,62 @@
 .scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list .player .player_name {
   flex: 3 1;
   display: flex;
+}
+
+.page--home {
+  background: url(./images/basketballDunk.jpeg) left/cover no-repeat;
+  min-height: calc(100vh - 3rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #e6e1e2;
+  font-size: 4rem;
+  text-align: center;
+}
+
+.page--login {
+  min-height: calc(100vh - 3rem);
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  background: url(./images/basketballNet.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.page--login p {
+  margin-bottom: 2rem;
+}
+
+.page--login form {
+  display: flex;
+  flex-flow: column;
+  gap: 2rem;
+  background: #e6e1e2;
+  padding: 3rem;
+  opacity: 0.9;
+}
+
+.nav--top {
+  background: #0e0d0c;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5rem;
+  box-sizing: content-box;
+  height: 3rem;
+  padding: 0 1rem;
+}
+
+.nav--top a {
+  color: #e6e1e2;
+  text-decoration: none;
+}
+
+.nav--top__right {
+  display: flex;
+  gap: 1rem;
 }

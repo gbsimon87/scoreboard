@@ -11,21 +11,25 @@ const AuthStatus = () => {
   let navigate = useNavigate();
 
   if (!auth.user) {
-    return <p>You are not logged in.</p>;
+    // return <p>You are not logged in.</p>;
+    return null;
   }
 
-  return (
-    <p>
-      Welcome {auth.user}!{" "}
-      <button
-        onClick={() => {
-          auth.signout(() => navigate("/"));
-        }}
-      >
-        Sign out
-      </button>
-    </p>
-  );
+  return null;
+
+  // return (
+  //   <p>
+  //     {console.log(auth)}
+  //     Welcome {auth.user}!{" "}
+  //     <button
+  //       onClick={() => {
+  //         auth.signout(() => navigate("/"));
+  //       }}
+  //     >
+  //       Sign out
+  //     </button>
+  //   </p>
+  // );
 }
 
 export default AuthStatus;
