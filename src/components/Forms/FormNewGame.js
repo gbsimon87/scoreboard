@@ -82,13 +82,10 @@ const FormNewGame = () => {
     // Add the new game to the beginning of the games array
     parsedData.unshift(data);
 
-    // Update local storage with the modified games array
     localStorage.setItem('games', JSON.stringify(parsedData));
 
-    // Dispatch the CREATE_GAME action to update the state if needed
     dispatch({ type: 'CREATE_GAME', payload: data });
 
-    // Navigate to the scoreboard or perform other actions as needed
     navigate('/scoreboard');
   };
 
@@ -96,45 +93,52 @@ const FormNewGame = () => {
     <div className="page page--new-game">
       <form className="form">
         <label>
-          Home Team Name:
+          Home Team Name
           <input type="text" value={homeTeamName} onChange={handleHomeTeamNameChange} />
         </label>
         <label>
-          Away Team Name:
+          Away Team Name
           <input type="text" value={awayTeamName} onChange={handleAwayTeamNameChange} />
         </label>
       </form>
 
-      <div>
-        <h3>Home Team Players</h3>
-        <input
-          type="text"
-          value={homePlayerName}
-          onChange={handleHomePlayerNameChange}
-          placeholder="Player Name"
-        />
-        <button onClick={() => addPlayerToTeam('home')}>Add Player</button>
-        <ul>
-          {homeTeamPlayers.map((player, index) => (
-            <li key={index}>{player?.name}</li>
-          ))}
-        </ul>
-      </div>
+      <div className="home-team-players-container">
+        <div className="home-team-players-list">
+          <label>
+            Home Team Players
+            <input
+              type="text"
+              value={homePlayerName}
+              onChange={handleHomePlayerNameChange}
+            />
+          </label>
+          <button onClick={() => addPlayerToTeam('home')}>Add Player</button>
 
-      <div>
-        <h3>Away Team Players</h3>
-        <input
-          type="text"
-          value={awayPlayerName}
-          onChange={handleAwayPlayerNameChange}
-          placeholder="Player Name"
-        />
-        <button onClick={() => addPlayerToTeam('away')}>Add Player</button>
-        <ul>
-          {awayTeamPlayers.map((player, index) => (
-            <li key={index}>{player?.name}</li>
-          ))}
-        </ul>
+        </div>
+
+        <div className="away-team-players-list">
+          <p>Away Team Players</p>
+          <input
+            type="text"
+            value={awayPlayerName}
+            onChange={handleAwayPlayerNameChange}
+          />
+          <button onClick={() => addPlayerToTeam('away')}>Add Player</button>
+        </div>
+
+        <div>
+          <ul>
+            {homeTeamPlayers.map((player, index) => (
+              <li key={index}>{player?.name}</li>
+            ))}
+          </ul>
+          <ul>
+            {awayTeamPlayers.map((player, index) => (
+              <li key={index}>{player?.name}</li>
+            ))}
+          </ul>
+        </div>
+
       </div>
 
       <div>

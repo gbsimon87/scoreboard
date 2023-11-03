@@ -37,7 +37,6 @@ const Home = () => {
 
   return (
     <div className="page--home">
-      <button className="button button--create-game" onClick={() => navigate("/new-game")}>New Game</button>
       <section className="games">
         <div className="games--live">
           <h3>Live Games</h3>

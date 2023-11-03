@@ -19,9 +19,8 @@ function NavTop() {
         <Link to="/">PSN</Link>
       </div>
       <div className='nav--top__right'>
-        {location.pathname === "/login" ? null : state?.user ? null : <Link to="/login">Login</Link>}
         {state?.user ? <Link onClick={(event) => handleSignOut(event)}>Log out</Link> : null}
-        {state?.user ? <Link to="/scoreboard">Scoreboard</Link> : null}
+        {location.pathname !== "/login" && location.pathname !== "/new-game" && <button className="button button--create-game" onClick={() => navigate("/new-game")}>New Game</button>}
       </div>
     </div>
   )
