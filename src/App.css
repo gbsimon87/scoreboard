@@ -168,6 +168,7 @@ input[type="text"] {
   flex-flow: column;
   display: flex;
   font-size: 1.25rem;
+  gap: 1rem;
 }
 
 .scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list>div:last-child {
@@ -206,7 +207,6 @@ input[type="text"] {
 .scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list .player .player_name {
   flex: 3 1;
   display: flex;
-  justify-content: center;
 }
 
 /* FOURTH SECTION */
@@ -307,6 +307,20 @@ input[type="text"] {
   margin-bottom: 1rem;
 }
 
+.players-roster-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.players-roster-container li {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.players-roster-container__home p,
+.players-roster-container__away p {
+  margin-bottom: 1rem;
+}
 
 .nav--top {
   background: #0e0d0c;

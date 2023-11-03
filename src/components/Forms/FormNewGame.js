@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../../context/GlobalContext';
-import { generateRandomId } from '../../utils';
+import { generateRandomId, slicedPlayerName } from '../../utils';
 
 const FormNewGame = () => {
   const [homeTeamName, setHomeTeamName] = useState('');
-  const [awayTeamName, setAwayTeamName] = useState('');
   const [homeTeamPlayers, setHomeTeamPlayers] = useState([]);
-  const [awayTeamPlayers, setAwayTeamPlayers] = useState([]);
   const [homePlayerName, setHomePlayerName] = useState('');
+  const [homeTeamSelectedPosition, setHomeTeamSelectedPosition] = useState("");
+  const [selectedHomeTeamPlayerNumber, setSelectedHomeTeamPlayerNumber] = useState('Select Number');
+  const [awayTeamName, setAwayTeamName] = useState('');
+  const [awayTeamPlayers, setAwayTeamPlayers] = useState([]);
   const [awayPlayerName, setAwayPlayerName] = useState('');
+  const [awayTeamSelectedPosition, setAwayTeamSelectedPosition] = useState("");
+  const [selectedAwayTeamPlayerNumber, setSelectedAwayTeamPlayerNumber] = useState('Select Number');
   const navigate = useNavigate();
   const { dispatch } = useGlobalContext();
 
@@ -33,9 +37,7 @@ const FormNewGame = () => {
     const player = {
       name: team === 'home' ? homePlayerName : awayPlayerName,
       id: generateRandomId(),
-      position: '', // Add any other properties you need
       fouls: 0,
-      number: 0,
       points: 0,
       assists: 0,
       rebounds: 0,
@@ -47,17 +49,49 @@ const FormNewGame = () => {
     };
 
     if (team === 'home') {
+      player.position = homeTeamSelectedPosition;
+      player.number = selectedHomeTeamPlayerNumber;
+
       if (homePlayerName.trim() !== '') {
-        setHomeTeamPlayers([...homeTeamPlayers, player]);
+        setHomeTeamPlayers([
+          ...homeTeamPlayers,
+          player
+        ]);
         setHomePlayerName(''); // Clear the input after adding a player
+        setHomeTeamSelectedPosition('');
+        setSelectedHomeTeamPlayerNumber('Select Number');
       }
     } else if (team === 'away') {
+      player.position = awayTeamSelectedPosition;
+      player.number = selectedAwayTeamPlayerNumber;
+
       if (awayPlayerName.trim() !== '') {
-        setAwayTeamPlayers([...awayTeamPlayers, player]);
+        setAwayTeamPlayers([
+          ...awayTeamPlayers,
+          player
+        ]);
         setAwayPlayerName(''); // Clear the input after adding a player
+        setAwayTeamSelectedPosition('');
+        setSelectedAwayTeamPlayerNumber('Select Number');
       }
     }
   };
+
+  const handleHomeTeamPositionChange = (event) => {
+    setHomeTeamSelectedPosition(event.target.value);
+  }
+
+  const handleAwayTeamPositionChange = (event) => {
+    setAwayTeamSelectedPosition(event.target.value);
+  }
+
+  const handleHomeTeamNumberChange = (event) => {
+    setSelectedHomeTeamPlayerNumber(event.target.value);
+  }
+
+  const handleAwayTeamNumberChange = (event) => {
+    setSelectedAwayTeamPlayerNumber(event.target.value);
+  }
 
   const handleStartGame = () => {
     const data = {
@@ -103,7 +137,7 @@ const FormNewGame = () => {
       </form>
 
       <div className="home-team-players-container">
-        <div className="home-team-players-list">
+        <div className="home-team-players-name">
           <label>
             Home Team Players
             <input
@@ -112,33 +146,73 @@ const FormNewGame = () => {
               onChange={handleHomePlayerNameChange}
             />
           </label>
+          <select value={homeTeamSelectedPosition} onChange={handleHomeTeamPositionChange}>
+            <option value="" disabled>Select Position</option>
+            <option value="PG">PG</option>
+            <option value="SG">SG</option>
+            <option value="SF">SF</option>
+            <option value="PF">PF</option>
+            <option value="C">C</option>
+          </select>
+          <input
+            type="number"
+            value={selectedHomeTeamPlayerNumber}
+            onChange={handleHomeTeamNumberChange}
+          />
           <button onClick={() => addPlayerToTeam('home')}>Add Player</button>
-
         </div>
 
-        <div className="away-team-players-list">
-          <p>Away Team Players</p>
+        <div className="away-team-players-name">
+          <label>
+            Away Team Players
+            <input
+              type="text"
+              value={awayPlayerName}
+              onChange={handleAwayPlayerNameChange}
+            />
+          </label>
+          <select value={awayTeamSelectedPosition} onChange={handleAwayTeamPositionChange}>
+            <option value="" disabled>Select Position</option>
+            <option value="PG">PG</option>
+            <option value="SG">SG</option>
+            <option value="SF">SF</option>
+            <option value="PF">PF</option>
+            <option value="C">C</option>
+          </select>
           <input
-            type="text"
-            value={awayPlayerName}
-            onChange={handleAwayPlayerNameChange}
+            type="number"
+            value={selectedAwayTeamPlayerNumber}
+            onChange={handleAwayTeamNumberChange}
           />
           <button onClick={() => addPlayerToTeam('away')}>Add Player</button>
         </div>
+      </div>
 
-        <div>
+      <div className="players-roster-container">
+        <div className="players-roster-container__home">
+          <h3>{homeTeamName}</h3>
           <ul>
             {homeTeamPlayers.map((player, index) => (
-              <li key={index}>{player?.name}</li>
-            ))}
-          </ul>
-          <ul>
-            {awayTeamPlayers.map((player, index) => (
-              <li key={index}>{player?.name}</li>
+              <li key={index}>
+                <span>{player?.position && player.position}</span>
+                <span>{player?.number && player.number}</span>
+                <span>{player?.name && slicedPlayerName(player.name)}</span>
+              </li>
             ))}
           </ul>
         </div>
-
+        <div className="players-roster-container__away">
+          <h3>{awayTeamName}</h3>
+          <ul>
+            {awayTeamPlayers.map((player, index) => (
+              <li key={index}>
+                <span>{player?.position && player.position}</span>
+                <span>{player?.number && player.number}</span>
+                <span>{player?.name && slicedPlayerName(player.name)}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <div>
