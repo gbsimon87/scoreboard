@@ -3,10 +3,35 @@ import { useGlobalContext } from '../context/GlobalContext';
 import ConfirmationModal from './Modal/ConfirmationModal';
 import { useNavigate } from 'react-router-dom';
 
-const Scoreboard = ({ selectedPlayer, handleAction, handleSelectPlayer }) => {
+const Scoreboard = () => {
   const { state: { currentGame }, dispatch } = useGlobalContext();
+  const [selectedPlayer, setSelectedPlayer] = useState({});
+
   const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
+
+  const handleSelectPlayer = (player, location) => {
+    const selectedPlayerDetails = {
+      player,
+      location
+    }
+    setSelectedPlayer(selectedPlayerDetails);
+  };
+
+  const handleAction = (actionType) => {
+    const selectedPlayerIsEmpty = Object.keys(selectedPlayer).length === 0;
+
+    if (selectedPlayerIsEmpty) return;
+
+    if (selectedPlayer) {
+      dispatch({
+        type: 'UPDATE_PLAYER_STAT',
+        payload: { actionType, selectedPlayer }
+      });
+
+      setSelectedPlayer({});
+    }
+  };
 
   const handleFinishGame = () => {
     setModalOpen(true);
@@ -146,10 +171,12 @@ const Scoreboard = ({ selectedPlayer, handleAction, handleSelectPlayer }) => {
         <div className="scoreboard-area__teams--team-list team-list-home">
           {
             homeTeam?.players?.map((player, index) => (
-              <div key={index} className={`player ${selectedPlayer && selectedPlayer.player && selectedPlayer.player.id === player.id ? "player-selected" : ""}`} onClick={() => handleSelectPlayer(player, "home")}>
-                {/* <div className="player_number">{player.number}</div> */}
-                <div className="player_name">{player.name}</div>
-                {/* <div className="player_position">{player.position}</div> */}
+              <div
+                key={index}
+                className={`player ${selectedPlayer && selectedPlayer.player && selectedPlayer.player.id === player.id ? "player-selected" : ""}`}
+                onClick={() => handleSelectPlayer(player, "home")}>
+                <div className="player_number">{player?.number}</div>
+                <div className="player_name">{player?.name}</div>
               </div>
             ))
           }
@@ -157,10 +184,12 @@ const Scoreboard = ({ selectedPlayer, handleAction, handleSelectPlayer }) => {
         <div className="scoreboard-area__teams--team-list team-list-away">
           {
             awayTeam?.players?.map((player, index) => (
-              <div key={index} className={`player ${selectedPlayer && selectedPlayer.player && selectedPlayer.player.id === player.id ? "player-selected" : ""}`} onClick={() => handleSelectPlayer(player, "away")}>
-                {/* <div className="player_number">{player.number}</div> */}
+              <div
+                key={index}
+                className={`player ${selectedPlayer && selectedPlayer.player && selectedPlayer.player.id === player.id ? "player-selected" : ""}`}
+                onClick={() => handleSelectPlayer(player, "away")}>
+                <div className="player_number">{player.number}</div>
                 <div className="player_name">{player.name}</div>
-                {/* <div className="player_position">{player.position}</div> */}
               </div>
             ))
           }

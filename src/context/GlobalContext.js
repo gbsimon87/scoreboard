@@ -21,6 +21,8 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const reducer = (state, action) => {
+    const currentGame = state.currentGame;
+
     switch (action.type) {
       case 'CREATE_GAME':
         const { id, homeTeam, awayTeam, completed } = action.payload;
@@ -59,12 +61,50 @@ export const GlobalProvider = ({ children }) => {
         return state;
 
       case 'SET_CURRENT_GAME_DATA':
-        const currentGame = action.payload;
+        const currentGameData = action.payload;
 
         return {
           ...state,
-          currentGame,
+          currentGameData,
         };
+
+      case 'UPDATE_PLAYER_STAT':
+        const { actionType, selectedPlayer } = action.payload;
+
+        if (currentGame) {
+          // Determine the team dynamically based on the player's location
+          const teamKey = selectedPlayer.location === 'home' ? 'homeTeam' : 'awayTeam';
+          const teamToUpdate = currentGame[teamKey];
+
+          if (teamToUpdate) {
+            // Find the player to update
+            const updatedPlayers = teamToUpdate.players.map(player => {
+              if (player.id === selectedPlayer.player.id) {
+                return {
+                  ...player,
+                  [actionType]: player[actionType] + 1,
+                };
+              } else {
+                return player;
+              }
+            });
+
+            // Create a new team object with the updated player array
+            const updatedTeam = { ...teamToUpdate, players: updatedPlayers };
+
+            // Create a new currentGame object with the updated team
+            const updatedGame = {
+              ...currentGame,
+              [teamKey]: updatedTeam,
+            };
+
+            return { ...state, currentGame: updatedGame };
+          }
+        }
+
+        // Return the original state if something goes wrong
+        return state;
+
 
       case 'SIGNIN':
         return {

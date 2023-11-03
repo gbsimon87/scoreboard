@@ -100,11 +100,13 @@ const FormNewGame = () => {
         name: homeTeamName,
         score: 0,
         players: homeTeamPlayers,
+        id: generateRandomId(),
       },
       awayTeam: {
         name: awayTeamName,
         score: 0,
         players: awayTeamPlayers,
+        id: generateRandomId(),
       },
       completed: false,
     };

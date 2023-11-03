@@ -193,6 +193,7 @@ input[type="text"] {
   justify-content: space-between;
   min-height: 3rem;
   align-items: center;
+  gap: 0.2rem;
 }
 
 .scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list .player.player-selected {
