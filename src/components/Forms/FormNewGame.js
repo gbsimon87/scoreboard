@@ -8,12 +8,12 @@ const FormNewGame = () => {
   const [homeTeamPlayers, setHomeTeamPlayers] = useState([]);
   const [homePlayerName, setHomePlayerName] = useState('');
   const [homeTeamSelectedPosition, setHomeTeamSelectedPosition] = useState("");
-  const [selectedHomeTeamPlayerNumber, setSelectedHomeTeamPlayerNumber] = useState('Select Number');
+  const [selectedHomeTeamPlayerNumber, setSelectedHomeTeamPlayerNumber] = useState('');
   const [awayTeamName, setAwayTeamName] = useState('');
   const [awayTeamPlayers, setAwayTeamPlayers] = useState([]);
   const [awayPlayerName, setAwayPlayerName] = useState('');
   const [awayTeamSelectedPosition, setAwayTeamSelectedPosition] = useState("");
-  const [selectedAwayTeamPlayerNumber, setSelectedAwayTeamPlayerNumber] = useState('Select Number');
+  const [selectedAwayTeamPlayerNumber, setSelectedAwayTeamPlayerNumber] = useState('');
   const navigate = useNavigate();
   const { dispatch } = useGlobalContext();
 
@@ -127,71 +127,73 @@ const FormNewGame = () => {
 
   return (
     <div className="page page--new-game">
-      <form className="form">
-        <label>
-          Home Team Name
-          <input type="text" value={homeTeamName} onChange={handleHomeTeamNameChange} />
-        </label>
-        <label>
-          Away Team Name
-          <input type="text" value={awayTeamName} onChange={handleAwayTeamNameChange} />
-        </label>
-      </form>
-
-      <div className="home-team-players-container">
-        <div className="home-team-players-name">
-          <label>
-            Home Team Players
+      <form className="form--create-teams">
+        <div className="form--create-teams__home-team-container">
+          <h3>Home Team</h3>
+          <input type="text" placeholder="Home Team Name" value={homeTeamName} onChange={handleHomeTeamNameChange} />
+          <div className="home-team-players-name">
             <input
               type="text"
               value={homePlayerName}
               onChange={handleHomePlayerNameChange}
+              placeholder="Home Team Player Name"
             />
-          </label>
-          <select value={homeTeamSelectedPosition} onChange={handleHomeTeamPositionChange}>
-            <option value="" disabled>Select Position</option>
-            <option value="PG">PG</option>
-            <option value="SG">SG</option>
-            <option value="SF">SF</option>
-            <option value="PF">PF</option>
-            <option value="C">C</option>
-          </select>
-          <input
-            type="number"
-            value={selectedHomeTeamPlayerNumber}
-            onChange={handleHomeTeamNumberChange}
-          />
-          <button onClick={() => addPlayerToTeam('home')}>Add Player</button>
+            <div className="form--create-teams__add-team-players-actions">
+              <select value={homeTeamSelectedPosition} onChange={handleHomeTeamPositionChange}>
+                <option value="" disabled>Position</option>
+                <option value="PG">PG</option>
+                <option value="SG">SG</option>
+                <option value="SF">SF</option>
+                <option value="PF">PF</option>
+                <option value="C">C</option>
+              </select>
+              <input
+                placeholder="Player #"
+                type="number"
+                min={0}
+                max={999}
+                value={selectedHomeTeamPlayerNumber}
+                onChange={handleHomeTeamNumberChange}
+              />
+              <button type="button" className="button" onClick={() => addPlayerToTeam('home')}>Add Player</button>
+            </div>
+          </div>
         </div>
-
-        <div className="away-team-players-name">
-          <label>
-            Away Team Players
+        <div className="form--create-teams__away-team-container">
+          <h3>Away Team</h3>
+          <input type="text" placeholder="Away Team Name" value={awayTeamName} onChange={handleAwayTeamNameChange} />
+          <div className="away-team-players-name">
             <input
+              placeholder="Away Team Player Name"
               type="text"
               value={awayPlayerName}
               onChange={handleAwayPlayerNameChange}
             />
-          </label>
-          <select value={awayTeamSelectedPosition} onChange={handleAwayTeamPositionChange}>
-            <option value="" disabled>Select Position</option>
-            <option value="PG">PG</option>
-            <option value="SG">SG</option>
-            <option value="SF">SF</option>
-            <option value="PF">PF</option>
-            <option value="C">C</option>
-          </select>
-          <input
-            type="number"
-            value={selectedAwayTeamPlayerNumber}
-            onChange={handleAwayTeamNumberChange}
-          />
-          <button onClick={() => addPlayerToTeam('away')}>Add Player</button>
+            <div className="form--create-teams__add-team-players-actions">
+              <select value={awayTeamSelectedPosition} onChange={handleAwayTeamPositionChange}>
+                <option value="" disabled>Position</option>
+                <option value="PG">PG</option>
+                <option value="SG">SG</option>
+                <option value="SF">SF</option>
+                <option value="PF">PF</option>
+                <option value="C">C</option>
+              </select>
+              <input
+                placeholder="Player #"
+                type="number"
+                min={0}
+                max={999}
+                value={selectedAwayTeamPlayerNumber}
+                onChange={handleAwayTeamNumberChange}
+              />
+              <button type="button" className="button" onClick={() => addPlayerToTeam('away')}>Add Player</button>
+            </div>
+          </div>
         </div>
-      </div>
+      </form>
 
-      <div className="players-roster-container">
-        <div className="players-roster-container__home">
+      <div className="team-roster-container">
+        <div className="team-roster-container__home">
           <h3>{homeTeamName}</h3>
           <ul>
             {homeTeamPlayers.map((player, index) => (
@@ -203,7 +205,7 @@ const FormNewGame = () => {
             ))}
           </ul>
         </div>
-        <div className="players-roster-container__away">
+        <div className="team-roster-container__away">
           <h3>{awayTeamName}</h3>
           <ul>
             {awayTeamPlayers.map((player, index) => (
@@ -217,8 +219,8 @@ const FormNewGame = () => {
         </div>
       </div>
 
-      <div>
-        <button onClick={() => handleStartGame()}>START GAME</button>
+      <div className="form--submit-container">
+        <button className="button" onClick={() => handleStartGame()}>START GAME</button>
       </div>
     </div>
   );
