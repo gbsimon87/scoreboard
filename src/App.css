@@ -119,6 +119,12 @@ input[type="number"]:focus-visible {
 
 /* SECOND SECTION */
 
+.scoreboard-area__box-score {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 1rem;
+}
+
 .scoreboard .scoreboard-area__stats-options {
   display: flex;
   flex: 1;
@@ -162,7 +168,7 @@ input[type="number"]:focus-visible {
 
 .scoreboard .scoreboard-area__teams {
   display: flex;
-  padding: 0 0.5rem;
+  padding: 0 1rem;
   gap: 2rem;
   overflow: scroll;
 }
@@ -213,17 +219,6 @@ input[type="number"]:focus-visible {
   flex: 3 1;
   display: flex;
   overflow-wrap: anywhere;
-}
-
-/* FOURTH SECTION */
-.scoreboard-area__finish {
-  text-align: center;
-}
-
-.scoreboard-area__finish button {
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
 }
 
 .page {
@@ -473,6 +468,36 @@ input[type="number"]:focus-visible {
   font-size: 1.25rem;
   min-width: 5rem;
   cursor: pointer;
+}
+
+/* BOX SCORE MODAL */
+.modal--box-score__stats {
+  display: flex;
+  flex-flow: column;
+  gap: 2rem;
+  overflow: scroll;
+}
+
+.modal--box-score__stats thead>tr>th:nth-child(1) {
+  text-align: initial;
+}
+
+.modal--box-score__stats tbody>tr>td:nth-child(1) {
+  text-align: initial;
+}
+
+.modal--box-score__stats tfoot>tr>th:nth-child(1) {
+  text-align: initial;
+}
+
+.modal--box-score__stats td {
+  text-align: center;
+}
+
+.modal--box-score__close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
 }
 
 @media screen and (min-width: 576px) {

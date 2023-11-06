@@ -1,16 +1,17 @@
 TO DO:
+[] Home         | Make sure the correct score is showing in the live and previous games
+[] Scoreboard   | When selecting a game from the live home game, that game's details should load in the scoreboard
+[] Scoreboard   | Every time a game action occurs, save the data to the local storage
 [] FormNewGame  | Validation - When creating a new game, make sure there are at least two team names, and at least one player per team
 [] FormNewGame  | After clicking add player button, set the cursor back to the corresponding player field
 [] FormNewGame  | Ensure the team name can fit, may need to slice it
-[] Scoreboard   | Only have modal exist if necessary
 [] Scoreboard   | Implement functionality where if the user first records an assist, we prompt right away options for 2PTFG and 3PTFG for a specific player.
 [] Scoreboard   | Implement functionality where if the user first records a 2PTFG and 3PTFG, we prompt right away options for an assist
-[] Scoreboard   | When selecting a game from the live home game, that game's details should load in the scoreboard
-[] Scoreboard   | Every time a game action occurs, save the data to the local storage
 [] Home         | CRUD options for live games and previous games
-[] Home         | Make sure the correct score is showing in the live and previous games
 
 COMPLETED:
+[x] Scoreboard  | Create a button that pops up the game's box score
+[x] Scoreboard  | Create box score and show players' stats per team and total game stats
 [x] Scoreboard  | Remove log out and new game links from navigation
 [x] Scoreboard  | The 2PTFG, and 3PTFG aren't correctly set up, as these need to add 2 points or 3 points respectively.
 [x] Scoreboard  | Fix the missed categories

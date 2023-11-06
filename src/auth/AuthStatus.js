@@ -15,6 +15,7 @@ const AuthStatus = () => {
     return null;
   }
 
+  // FOR THE MOMENT, RETUNING NULL UNTIL AUTH IS IMPLEMENTED
   return null;
 
   // return (

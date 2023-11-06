@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../context/GlobalContext';
 import ConfirmationModal from './Modal/ConfirmationModal';
 import { slicedPlayerName } from '../utils';
+import BoxScoreModal from './Modal/BoxScoreModal';
 
 const Scoreboard = () => {
   const { state: { currentGame }, dispatch } = useGlobalContext();
   const [selectedPlayer, setSelectedPlayer] = useState({});
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [showBoxScoreModal, setShowBoxScoreModal] = useState(false);
   const navigate = useNavigate();
 
   const handleSelectPlayer = (player, location) => {
@@ -34,41 +36,40 @@ const Scoreboard = () => {
   };
 
   const handleFinishGame = () => {
-    setModalOpen(true);
+    setShowConfirmationModal(true);
   };
 
   const handleCompleteGame = () => {
     if (currentGame) {
       currentGame.completed = true;
 
-      // Dispatch the action to complete the game
       dispatch({ type: 'COMPLETE_GAME', payload: currentGame });
 
-      // Get the existing games data from local storage
       const storedData = localStorage.getItem('games');
       let parsedData = storedData ? JSON.parse(storedData) : [];
-
-      // Find the index of the game with the matching ID in local storage
       const gameIndex = parsedData.findIndex((game) => game.id === currentGame.id);
 
       if (gameIndex !== -1) {
-        // Update the game in local storage
         parsedData[gameIndex] = currentGame;
-
-        // Update local storage with the modified games array
         localStorage.setItem('games', JSON.stringify(parsedData));
       }
 
-      setModalOpen(false);
+      setShowConfirmationModal(false);
       navigate("/")
-    } else {
-      console.log("currentGame not found");
     }
   };
 
-  const handleCloseModal = () => {
-    setModalOpen(false);
+  const handleCloseConfirmationModal = () => {
+    setShowConfirmationModal(false);
   };
+
+  const handleShowBoxScore = () => {
+    setShowBoxScoreModal(true);
+  }
+
+  const handleCloseBoxScoreModal = () => {
+    setShowBoxScoreModal(false);
+  }
 
   const {
     homeTeam,
@@ -149,6 +150,10 @@ const Scoreboard = () => {
           </div>
         )}
       </div>
+      <div className="scoreboard-area__box-score">
+        <button className="button" onClick={handleFinishGame}>Finish Game</button>
+        <button className="button" onClick={handleShowBoxScore}>Box Score</button>
+      </div>
       <div className="scoreboard-area__stats-options">
         <div className="left-side">
           <button className="button button_made left-side__stats" onClick={() => handleAction("fouls")}>FL</button>
@@ -196,14 +201,16 @@ const Scoreboard = () => {
         </div>
       </div>
 
-      <div className="scoreboard-area__finish">
-        <button className="button" onClick={handleFinishGame}>Finish Game</button>
-      </div>
-
       <ConfirmationModal
-        isOpen={isModalOpen}
-        closeModal={handleCloseModal}
+        isOpen={showConfirmationModal}
+        closeModal={handleCloseConfirmationModal}
         onConfirm={handleCompleteGame}
+      />
+
+      <BoxScoreModal
+        isOpen={showBoxScoreModal}
+        closeModal={handleCloseBoxScoreModal}
+        data={currentGame}
       />
     </div>
   )
