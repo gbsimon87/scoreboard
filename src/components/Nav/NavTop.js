@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../../context/GlobalContext';
 
-function NavTop() {
+const NavTop = () => {
   const location = useLocation();
   let navigate = useNavigate();
 
@@ -10,7 +10,7 @@ function NavTop() {
 
   const handleSignOut = (event) => {
     event.preventDefault();
-    signout(() => navigate("/"))
+    signout(() => navigate("/"));
   }
 
   return (
@@ -19,8 +19,12 @@ function NavTop() {
         <Link to="/">PSN</Link>
       </div>
       <div className='nav--top__right'>
-        {state?.user ? <Link onClick={(event) => handleSignOut(event)}>Log out</Link> : null}
-        {location.pathname !== "/login" && location.pathname !== "/new-game" && <button className="button button--create-game" onClick={() => navigate("/new-game")}>New Game</button>}
+        {state?.user && location.pathname === "/" && (
+          <Link onClick={(event) => handleSignOut(event)}>Log out</Link>
+        )}
+        {(!state?.user || location.pathname === "/") && (
+          <button className="button button--create-game" onClick={() => navigate("/new-game")}>New Game</button>
+        )}
       </div>
     </div>
   )
