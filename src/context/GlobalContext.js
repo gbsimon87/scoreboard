@@ -16,7 +16,7 @@ export const GlobalProvider = ({ children }) => {
     teams: [],
     players: [],
     games: [],
-    currentGame: [],
+    currentGame: {},
     user: null
   };
 
@@ -41,13 +41,11 @@ export const GlobalProvider = ({ children }) => {
         };
 
       case 'COMPLETE_GAME':
-        const updatedGame = action.payload; // Updated game data
+        const updatedGame = action.payload;
 
-        // Find the index of the game with the matching ID in the games array
         const gameIndex = state.games.findIndex((game) => game.id === updatedGame.id);
 
         if (gameIndex !== -1) {
-          // Update the game in the games array
           const updatedGames = [...state.games];
           updatedGames[gameIndex] = updatedGame;
 
@@ -65,46 +63,64 @@ export const GlobalProvider = ({ children }) => {
 
         return {
           ...state,
-          currentGameData,
+          currentGame: currentGameData
         };
 
       case 'UPDATE_PLAYER_STAT':
         const { actionType, selectedPlayer } = action.payload;
 
         if (currentGame) {
-          // Determine the team dynamically based on the player's location
           const teamKey = selectedPlayer.location === 'home' ? 'homeTeam' : 'awayTeam';
           const teamToUpdate = currentGame[teamKey];
 
           if (teamToUpdate) {
-            // Find the player to update
             const updatedPlayers = teamToUpdate.players.map(player => {
               if (player.id === selectedPlayer.player.id) {
-                return {
+                let updatedPlayer = {
                   ...player,
                   [actionType]: player[actionType] + 1,
                 };
+
+                if (actionType === 'freeThrowsMade') {
+                  updatedPlayer.points = updatedPlayer.points + 1;
+                } else if (actionType === 'twoPointFieldGoalsMade') {
+                  updatedPlayer.points = updatedPlayer.points + 2;
+                } else if (actionType === 'threePointFieldGoalsMade') {
+                  updatedPlayer.points = updatedPlayer.points + 3;
+                }
+                return updatedPlayer;
               } else {
                 return player;
               }
             });
 
-            // Create a new team object with the updated player array
             const updatedTeam = { ...teamToUpdate, players: updatedPlayers };
-
-            // Create a new currentGame object with the updated team
             const updatedGame = {
               ...currentGame,
               [teamKey]: updatedTeam,
             };
 
+            if (actionType === 'freeThrowsMade') {
+              updatedGame[teamKey].score = updatedGame[teamKey].score + 1;
+            }
+            if (actionType === 'twoPointFieldGoalsMade') {
+              updatedGame[teamKey].score = updatedGame[teamKey].score + 2;
+            }
+            if (actionType === 'threePointFieldGoalsMade') {
+              updatedGame[teamKey].score = updatedGame[teamKey].score + 3;
+            }
+
             return { ...state, currentGame: updatedGame };
           }
         }
 
-        // Return the original state if something goes wrong
         return state;
 
+      // case 'RESET_CURRENT_GAME':
+      //   return {
+      //     ...state,
+      //     currentGame: []
+      //   };
 
       case 'SIGNIN':
         return {

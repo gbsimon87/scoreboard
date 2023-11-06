@@ -38,14 +38,18 @@ const FormNewGame = () => {
       name: team === 'home' ? homePlayerName : awayPlayerName,
       id: generateRandomId(),
       fouls: 0,
-      points: 0,
       assists: 0,
       rebounds: 0,
       steals: 0,
       blocks: 0,
-      threePoints: 0,
+      points: 0,
+      freeThrowsMade: 0,
+      freeThrowsMissed: 0,
+      twoPointFieldGoalsMade: 0,
+      twoPointFieldGoalsMissed: 0,
+      threePointFieldGoalsMade: 0,
+      threePointFieldGoalsMissed: 0,
       turnovers: 0,
-      freethrows: 0,
     };
 
     if (team === 'home') {

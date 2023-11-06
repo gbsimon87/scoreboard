@@ -201,8 +201,8 @@ input[type="number"]:focus-visible {
 }
 
 .scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list .player.player-selected {
-  background: #e3aa69;
-  color: white;
+  color: #e3aa69;
+  padding-left: 0.5rem;
 }
 
 .scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list .player.player-selected:nth-child(odd) .scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list .player:nth-child(odd) {

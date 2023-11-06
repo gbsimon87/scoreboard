@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../context/GlobalContext';
 import ConfirmationModal from './Modal/ConfirmationModal';
-import { useNavigate } from 'react-router-dom';
+import { slicedPlayerName } from '../utils';
 
 const Scoreboard = () => {
   const { state: { currentGame }, dispatch } = useGlobalContext();
   const [selectedPlayer, setSelectedPlayer] = useState({});
-
   const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -153,18 +153,18 @@ const Scoreboard = () => {
         <div className="left-side">
           <button className="button button_made left-side__stats" onClick={() => handleAction("fouls")}>FL</button>
           <button className="button button_made left-side__stats" onClick={() => handleAction("turnovers")}>TO</button>
-          <button className="button button_made left-side__stats" onClick={() => handleAction("freethrows")}>FT</button>
+          <button className="button button_made left-side__stats" onClick={() => handleAction("freeThrowsMade")}>FT</button>
           <button className="button button_made left-side__stats" onClick={() => handleAction("steals")}>STL</button>
           <button className="button button_made left-side__stats" onClick={() => handleAction("blocks")}>BLK</button>
-          <button className="button button_made left-side__stats" onClick={() => handleAction("threePoints")}>3PT</button>
+          <button className="button button_made left-side__stats" onClick={() => handleAction("threePointFieldGoalsMade")}>3PT</button>
           <button className="button button_made left-side__stats" onClick={() => handleAction("assists")}>AST</button>
           <button className="button button_made left-side__stats" onClick={() => handleAction("rebounds")}>REB</button>
-          <button className="button button_made left-side__stats" onClick={() => handleAction("twoPoints")}>2PT</button>
+          <button className="button button_made left-side__stats" onClick={() => handleAction("twoPointFieldGoalsMade")}>2PT</button>
         </div>
         <div className="right-side">
-          <button className="button button_missed right-side__stats">FT</button>
-          <button className="button button_missed right-side__stats">3PT</button>
-          <button className="button button_ed right-side__stats">2PT</button>
+          <button className="button button_missed right-side__stats" onClick={() => handleAction("freeThrowsMissed")}>FT</button>
+          <button className="button button_missed right-side__stats" onClick={() => handleAction("threePointFieldGoalsMissed")}>3PT</button>
+          <button className="button button_missed right-side__stats" onClick={() => handleAction("twoPointFieldGoalsMissed")}>2PT</button>
         </div>
       </div>
       <div className="scoreboard-area__teams">
@@ -175,8 +175,8 @@ const Scoreboard = () => {
                 key={index}
                 className={`player ${selectedPlayer && selectedPlayer.player && selectedPlayer.player.id === player.id ? "player-selected" : ""}`}
                 onClick={() => handleSelectPlayer(player, "home")}>
-                <div className="player_number">{player?.number}</div>
-                <div className="player_name">{player?.name}</div>
+                <div className="player_number">{player?.number} | </div>
+                <div className="player_name">{player?.name && slicedPlayerName(player.name)}</div>
               </div>
             ))
           }
@@ -188,8 +188,8 @@ const Scoreboard = () => {
                 key={index}
                 className={`player ${selectedPlayer && selectedPlayer.player && selectedPlayer.player.id === player.id ? "player-selected" : ""}`}
                 onClick={() => handleSelectPlayer(player, "away")}>
-                <div className="player_number">{player.number}</div>
-                <div className="player_name">{player.name}</div>
+                <div className="player_number">{player?.number} | </div>
+                <div className="player_name">{player?.name && slicedPlayerName(player.name)}</div>
               </div>
             ))
           }
