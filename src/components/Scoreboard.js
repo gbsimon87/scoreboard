@@ -81,12 +81,12 @@ const Scoreboard = () => {
       <div className="scoreboard-area__score">
         <div className="scoreboard-area__score-team-scores">
           <div className="homeTeam">
-            <span>{homeTeam?.name}</span>
+            <h1>{homeTeam?.name}</h1>
             <span>{homeTeam?.score}</span>
           </div>
           <div className="awayTeam">
             <span>{awayTeam?.score}</span>
-            <span>{awayTeam?.name}</span>
+            <h1>{awayTeam?.name}</h1>
           </div>
         </div>
         {Object.keys(selectedPlayer).length > 0 && (
@@ -180,7 +180,8 @@ const Scoreboard = () => {
                 key={index}
                 className={`player ${selectedPlayer && selectedPlayer.player && selectedPlayer.player.id === player.id ? "player-selected" : ""}`}
                 onClick={() => handleSelectPlayer(player, "home")}>
-                <div className="player_number">{player?.number} | </div>
+                <div className="player_number">{player?.number}</div>
+                <span>|</span>
                 <div className="player_name">{player?.name && slicedPlayerName(player.name)}</div>
               </div>
             ))
@@ -193,8 +194,9 @@ const Scoreboard = () => {
                 key={index}
                 className={`player ${selectedPlayer && selectedPlayer.player && selectedPlayer.player.id === player.id ? "player-selected" : ""}`}
                 onClick={() => handleSelectPlayer(player, "away")}>
-                <div className="player_number">{player?.number} | </div>
                 <div className="player_name">{player?.name && slicedPlayerName(player.name)}</div>
+                <span>|</span>
+                <div className="player_number">{player?.number}</div>
               </div>
             ))
           }

@@ -42,7 +42,7 @@ const TeamTable = ({ team }) => {
       <table>
         <thead>
           <tr>
-            <th>Name</th>
+            <th>NAME</th>
             <th>PTS</th>
             <th>AST</th>
             <th>REB</th>
@@ -111,10 +111,11 @@ const CombinedTotals = ({ homeTeam, awayTeam }) => {
 
   return (
     <div>
+      <h3>Game Totals</h3>
       <table>
         <thead>
           <tr>
-            <th>Game</th>
+            <th></th>
             {statCategories.map((category) => (
               <th key={category}>{category}</th>
             ))}
@@ -122,7 +123,7 @@ const CombinedTotals = ({ homeTeam, awayTeam }) => {
         </thead>
         <tbody>
           <tr>
-            <td></td>
+            <td>Total</td>
             {statCategories.map((category) => (
               <td key={category}>{combinedStats[category]}</td>
             ))}

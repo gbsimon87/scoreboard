@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../../context/GlobalContext';
 
@@ -23,11 +23,16 @@ const NavTop = () => {
           <Link onClick={(event) => handleSignOut(event)}>Log out</Link>
         )}
         {(!state?.user || location.pathname === "/") && (
-          <button className="button button--create-game" onClick={() => navigate("/new-game")}>New Game</button>
-        )}
+          location.pathname !== "/login" && (
+            <button
+              className="button button--create-game"
+              onClick={() => navigate("/new-game")}>
+              New Game
+            </button>
+          ))}
       </div>
     </div>
-  )
+  );
 }
 
 export default NavTop;

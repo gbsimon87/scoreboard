@@ -34,11 +34,11 @@ const LoginPage = () => {
 
   return (
     <div className="page page--login">
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username: <input name="username" type="text" />
-        </label>{" "}
-        <button className="button" type="submit">Login</button>
+      <form className="form form--login" onSubmit={handleSubmit}>
+        <input className="form__input" placeholder="Username" name="username" type="text" required />
+        <div className="form__button-wrapper"> {/* Added BEM-style class here */}
+          <button className="button form__button" type="submit">Login</button>
+        </div>
       </form>
     </div>
   );
