@@ -104,6 +104,7 @@ input[type="number"]:focus-visible {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  flex: 1;
 }
 
 .scoreboard-area__score-selected-player {
