@@ -30,6 +30,13 @@ const NavTop = () => {
               New Game
             </button>
           ))}
+        {(!state?.user && location.pathname === "/") && (
+          <button
+            className="button button--login"
+            onClick={() => navigate("/login")}>
+            Login
+          </button>
+        )}
       </div>
     </div>
   );

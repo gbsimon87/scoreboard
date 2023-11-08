@@ -6,6 +6,8 @@ TO DO:
 [] Scoreboard   | Implement functionality where if the user first records a 2PTFG and 3PTFG, we prompt right away options for an assist
 [] Scoreboard   | Add multiple game statuses
 [] Home         | CRUD options for live games and previous games
+[] App          | Go through each component one by one, and fix the CSS classes using BEM syntax styling
+[] App          | Go through each component one by one, and extract CSS classes to respective folders
 
 COMPLETED:
 [x] Scoreboard   | Fix player name width
