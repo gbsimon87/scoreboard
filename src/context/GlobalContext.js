@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import { fakeAuthProvider } from '../auth/fakeAuthProvider';
+import { getLocalStorage, setLocalStorage } from '../utils';
 
 const GlobalContext = createContext();
 
@@ -110,17 +111,28 @@ export const GlobalProvider = ({ children }) => {
               updatedGame[teamKey].score = updatedGame[teamKey].score + 3;
             }
 
-            return { ...state, currentGame: updatedGame };
+            // Update your application state with the modified data
+            const newState = { ...state, currentGame: updatedGame };
+
+            // Retrieve the existing games from local storage
+            const existingGames = getLocalStorage('games') || [];
+
+            // Find the index of the current game within the existing games
+            const gameIndex = existingGames.findIndex(game => game.id === currentGame.id);
+
+            if (gameIndex !== -1) {
+              // Replace the old game with the updated game
+              existingGames[gameIndex] = updatedGame;
+            }
+
+            // Update the 'games' key in local storage with the modified games array
+            setLocalStorage('games', existingGames);
+
+            return newState; // Return the updated state
           }
         }
 
         return state;
-
-      // case 'RESET_CURRENT_GAME':
-      //   return {
-      //     ...state,
-      //     currentGame: []
-      //   };
 
       case 'SIGNIN':
         return {
