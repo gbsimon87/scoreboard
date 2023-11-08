@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../context/GlobalContext';
 import ConfirmationModal from './Modal/ConfirmationModal';
-import { slicedPlayerName } from '../utils';
+import { isObjectEmpty, slicedPlayerName } from '../utils';
 import BoxScoreModal from './Modal/BoxScoreModal';
 
 const Scoreboard = () => {
@@ -70,6 +70,15 @@ const Scoreboard = () => {
   const handleCloseBoxScoreModal = () => {
     setShowBoxScoreModal(false);
   }
+
+  useEffect(() => {
+    const currentGameDataIsEmpty = isObjectEmpty(currentGame);
+
+    if (currentGameDataIsEmpty) {
+      navigate("/");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const {
     homeTeam,

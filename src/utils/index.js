@@ -36,10 +36,15 @@ const setLocalStorage = (key, data) => {
   }
 }
 
+const isObjectEmpty = (obj) => {
+  return Object.keys(obj).length === 0;
+}
+
 // Export the functions for use in your code
 export {
   generateRandomId,
   getLocalStorage,
   setLocalStorage,
-  slicedPlayerName
+  slicedPlayerName,
+  isObjectEmpty
 };

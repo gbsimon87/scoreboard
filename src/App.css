@@ -183,8 +183,7 @@ input[type="number"]:focus-visible {
   padding: 0 1rem;
   gap: 2rem;
   overflow: scroll;
-  max-width: 30rem;
-  margin: 0 auto;
+  justify-content: space-around;
 }
 
 .scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list {
@@ -232,6 +231,7 @@ input[type="number"]:focus-visible {
   gap: 0.2rem;
   padding: 0.5rem 0;
   border-bottom: 1px solid #ccc;
+  cursor: pointer;
 }
 
 .scoreboard .scoreboard-area__teams .scoreboard-area__teams--team-list .player.player-selected {
@@ -614,6 +614,12 @@ input[type="number"]:focus-visible {
 
   .scoreboard-area__score-team-scores>div {
     gap: 2rem;
+  }
+
+  .scoreboard .scoreboard-area__teams {
+    margin: 0 auto;
+    min-width: 35rem;
+    max-width: 50rem;
   }
 }
 
